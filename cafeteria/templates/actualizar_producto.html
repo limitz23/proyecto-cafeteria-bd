@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actualizar Producto</title>
+</head>
+<body>
+    <h1>Actualizar Producto: {{ producto.nombre }}</h1>
+    
+    <form action="/actualizar_producto/{{ producto.id_producto }}" method="POST">
+        <label>Nombre:</label><br>
+        <input type="text" name="nombre" value="{{ producto.nombre }}" required><br><br>
+
+        <label>Categoría:</label><br>
+        <input type="text" name="categoria" value="{{ producto.categoria }}" required><br><br>
+
+        <label>Precio:</label><br>
+        <input type="number" step="0.01" name="precio" value="{{ producto.precio }}" required><br><br>
+
+        <label>Stock:</label><br>
+        <input type="number" name="stock" value="{{ producto.stock }}" required><br><br>
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+    <br>
+    <a href="/productos">Cancelar y volver a la lista</a>
+</body>
+</html>

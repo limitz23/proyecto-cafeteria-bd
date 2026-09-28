@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos - Cafetería</title>
+</head>
+<body>
+    <h1>Historial de Pedidos y Totales</h1>
+    
+    <a href="/"><button style="padding: 10px 20px;">Volver al Inicio</button></a>
+    <a href="/agregar_pedido"><button style="padding: 10px 20px;">Agregar</button></a>
+    <br><br>
+
+    <table border="1">
+        <tr>
+            <th>ID Pedido</th>
+            <th>Cliente</th>
+            <th>Estado</th>
+            <th>Total a Pagar</th>
+            <th>Acciones</th>
+        </tr>
+        {% for ped in pedidos %}
+        <tr>
+            <td>{{ ped.id_pedido }}</td>
+            <td>{{ ped.cliente }}</td>
+            <td>{{ ped.estado }}</td>
+            <td>${{ ped.total }}</td>
+            <td>
+                <a href="/actualizar_pedido/{{ ped.id_pedido }}">
+                    <button style="padding: 10px 20px;">Actualizar</button>
+                </a>
+                <a href="/borrar_pedido/{{ ped.id_pedido }}" onclick="return confirm('¿Estás seguro de que deseas borrar este pedido?');">
+                    <button style="padding: 10px 20px;">Borrar</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

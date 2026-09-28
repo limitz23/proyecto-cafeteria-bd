@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actualizar Estado del Pedido</title>
+</head>
+<body>
+    <h1>Actualizar Pedido #{{ pedido.id_pedido }}</h1>
+    
+    <form action="/actualizar_pedido/{{ pedido.id_pedido }}" method="POST">
+        <label>Cliente (Solo lectura):</label><br>
+        <input type="text" value="{{ pedido.cliente }}" disabled><br><br>
+
+        <label>Estado Actual:</label><br>
+        <select name="estado" required>
+            <option value="Pendiente" {% if pedido.estado == 'Pendiente' %}selected{% endif %}>Pendiente</option>
+            <option value="En preparación" {% if pedido.estado == 'En preparación' %}selected{% endif %}>En preparación</option>
+            <option value="Completado" {% if pedido.estado == 'Completado' %}selected{% endif %}>Completado</option>
+        </select><br><br>
+
+        <button type="submit">Actualizar Estado</button>
+    </form>
+    <br>
+    <a href="/pedidos">Cancelar y volver a la lista</a>
+</body>
+</html>

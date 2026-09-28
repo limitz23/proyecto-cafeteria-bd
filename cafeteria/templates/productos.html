@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos - Cafetería</title>
+</head>
+<body>
+    <h1>Menú de Productos</h1>
+    
+    <a href="/"><button style="padding: 10px 20px;">Volver al Inicio</button></a>
+    <a href="/agregar_producto"><button style="padding: 10px 20px;">Agregar</button></a>
+    <br><br>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acciones</th>
+        </tr>
+        {% for prod in productos %}
+        <tr>
+            <td>{{ prod.id_producto }}</td>
+            <td>{{ prod.nombre }}</td>
+            <td>{{ prod.categoria }}</td>
+            <td>${{ prod.precio }}</td>
+            <td>{{ prod.stock }}</td>
+            <td>
+                <a href="/actualizar_producto/{{ prod.id_producto }}">
+                    <button style="padding: 10px 20px;">Actualizar</button>
+                </a>
+                <a href="/borrar_producto/{{ prod.id_producto }}" onclick="return confirm('¿Estás seguro de que deseas borrar este producto?');">
+                    <button style="padding: 10px 20px;">Borrar</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

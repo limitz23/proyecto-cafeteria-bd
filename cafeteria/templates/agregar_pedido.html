@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Nuevo Pedido</title>
+</head>
+<body>
+    <h1>Crear Nuevo Pedido</h1>
+    
+    <form action="/agregar_pedido" method="POST">
+        <label>Seleccionar Cliente:</label><br>
+        <select name="id_cliente" required>
+            <option value="">-- Elija un cliente --</option>
+            {% for cliente in clientes %}
+                <option value="{{ cliente.id_cliente }}">{{ cliente.nombre }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Estado del Pedido:</label><br>
+        <select name="estado" required>
+            <option value="Pendiente">Pendiente</option>
+            <option value="En preparación">En preparación</option>
+            <option value="Completado">Completado</option>
+        </select><br><br>
+
+        <button type="submit">Crear Pedido</button>
+    </form>
+    <br>
+    <a href="/pedidos">Cancelar y volver a la lista</a>
+</body>
+</html>
