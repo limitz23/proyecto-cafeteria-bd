@@ -9,7 +9,9 @@
     
     <a href="/"><button style="padding: 10px 20px;">Volver al Inicio</button></a>
     <a href="/agregar_pedido"><button style="padding: 10px 20px;">Agregar</button></a>
-    <br><br>
+    <button onclick="irAActualizar()" style="padding: 10px 20px;">Actualizar</button>
+    <!-- Nueva sección para Actualizar y Borrar escribiendo el ID -->
+   
 
     <table border="1">
         <tr>
@@ -17,7 +19,6 @@
             <th>Cliente</th>
             <th>Estado</th>
             <th>Total a Pagar</th>
-            <th>Acciones</th>
         </tr>
         {% for ped in pedidos %}
         <tr>
@@ -25,16 +26,38 @@
             <td>{{ ped.cliente }}</td>
             <td>{{ ped.estado }}</td>
             <td>${{ ped.total }}</td>
-            <td>
-                <a href="/actualizar_pedido/{{ ped.id_pedido }}">
-                    <button style="padding: 10px 20px;">Actualizar</button>
-                </a>
-                <a href="/borrar_pedido/{{ ped.id_pedido }}" onclick="return confirm('¿Estás seguro de que deseas borrar este pedido?');">
-                    <button style="padding: 10px 20px;">Borrar</button>
-                </a>
-            </td>
         </tr>
         {% endfor %}
     </table>
+
+     <span style="margin-left: 15px;">
+        <label><b>ID del Pedido:</b></label>
+        <input type="number" id="input_id_pedido" style="padding: 8px; width: 60px;" placeholder="Ej: 1">
+        
+        
+        <button onclick="irABorrar()" style="padding: 10px 20px;">Borrar</button>
+    </span>
+    <br><br>
+    <script>
+        function irAActualizar() {
+            let id = document.getElementById('input_id_pedido').value;
+            if(id) {
+                window.location.href = '/actualizar_pedido/' + id;
+            } else {
+                alert("Por favor, ingresa el ID del pedido que deseas actualizar.");
+            }
+        }
+
+        function irABorrar() {
+            let id = document.getElementById('input_id_pedido').value;
+            if(id) {
+                if(confirm('¿Estás seguro de que deseas borrar el pedido con el ID ' + id + '?')) {
+                    window.location.href = '/borrar_pedido/' + id;
+                }
+            } else {
+                alert("Por favor, ingresa el ID del pedido que deseas borrar.");
+            }
+        }
+    </script>
 </body>
 </html>

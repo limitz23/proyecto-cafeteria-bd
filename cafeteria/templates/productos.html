@@ -9,8 +9,9 @@
     
     <a href="/"><button style="padding: 10px 20px;">Volver al Inicio</button></a>
     <a href="/agregar_producto"><button style="padding: 10px 20px;">Agregar</button></a>
-    <br><br>
-
+     <button onclick="irAActualizar()" style="padding: 10px 20px;">Actualizar</button>
+    
+   
     <table border="1">
         <tr>
             <th>ID</th>
@@ -18,7 +19,6 @@
             <th>Categoría</th>
             <th>Precio</th>
             <th>Stock</th>
-            <th>Acciones</th>
         </tr>
         {% for prod in productos %}
         <tr>
@@ -27,16 +27,41 @@
             <td>{{ prod.categoria }}</td>
             <td>${{ prod.precio }}</td>
             <td>{{ prod.stock }}</td>
-            <td>
-                <a href="/actualizar_producto/{{ prod.id_producto }}">
-                    <button style="padding: 10px 20px;">Actualizar</button>
-                </a>
-                <a href="/borrar_producto/{{ prod.id_producto }}" onclick="return confirm('¿Estás seguro de que deseas borrar este producto?');">
-                    <button style="padding: 10px 20px;">Borrar</button>
-                </a>
-            </td>
         </tr>
         {% endfor %}
     </table>
+     <!-- Nueva sección para Actualizar y Borrar escribiendo el ID -->
+    <span style="margin-left: 15px;">
+        <label><b>ID del Producto:</b></label>
+        <input type="number" id="input_id_producto" style="padding: 8px; width: 60px;" placeholder="Ej: 1">
+        
+       
+        <button onclick="irABorrar()" style="padding: 10px 20px;">Borrar</button>
+    </span>
+    <br><br>
+
+
+    <!-- Pequeño script para leer la cajita de texto y enviarte a la ruta correcta -->
+    <script>
+        function irAActualizar() {
+            let id = document.getElementById('input_id_producto').value;
+            if(id) {
+                window.location.href = '/actualizar_producto/' + id;
+            } else {
+                alert("Por favor, ingresa el ID del producto que deseas actualizar.");
+            }
+        }
+
+        function irABorrar() {
+            let id = document.getElementById('input_id_producto').value;
+            if(id) {
+                if(confirm('¿Estás seguro de que deseas borrar el producto con el ID ' + id + '?')) {
+                    window.location.href = '/borrar_producto/' + id;
+                }
+            } else {
+                alert("Por favor, ingresa el ID del producto que deseas borrar.");
+            }
+        }
+    </script>
 </body>
 </html>
